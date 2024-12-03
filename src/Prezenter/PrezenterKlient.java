@@ -1,17 +1,15 @@
 package Prezenter;
 
-import Model.IModelKonta;
-import Model.IModelLogowania;
-import Model.ModelKonta;
-import Model.Konto;
-import Model.ModelLogowania;
+import Model.*;
 import Widok.IWidokKlient;
 import Widok.WidokKlient;
 
-public class BankKlient implements IBankKlient {
-    IModelLogowania modelLogowania = new ModelLogowania();
-    IWidokKlient widokKlient;
-    IModelKonta modelKonta;
+import java.util.ArrayList;
+
+public class PrezenterKlient implements IPrezenterKlient {
+    private IModelLogowania modelLogowania = new ModelLogowania();
+    private IWidokKlient widokKlient;
+    private IModelKonto modelKonto;
     public void zaloguj(int numerKonta, String haslo) {
         widokKlient = new WidokKlient();
 
@@ -29,9 +27,9 @@ public class BankKlient implements IBankKlient {
 
         switch(wybor) {
             case("1"): widokKlient.wyswieltWyslijPrzelew(); break;
-            case("2"): widokKlient.wyswietlHistorieTransakcji(); break;
+            case("2"): sprawdzHistorieTransakcji(); break;
             case("3"): widokKlient.wyswietlWymianaWalut(); break;
-            case("4"): widokKlient.wyswietlSaldo(); break;
+            case("4"): sprawdzSaldo(); break;
             default: {
                 widokKlient.wyswietlKomunikat("zly wybor");
                 break;
@@ -42,9 +40,9 @@ public class BankKlient implements IBankKlient {
     }
 
     public void wyslijPrzelew(float kwota, int numerKonta, String tytul) {
-        modelKonta = new ModelKonta();
+        modelKonto = new ModelKonto();
 
-        Konto konto = modelKonta.wyszukajKonto(numerKonta);
+        Konto konto = modelKonto.wyszukajKonto(numerKonta);
         if(konto == null) {
             widokKlient.wyswietlKomunikat("nie ma takiego konta!");
             return;
@@ -61,8 +59,8 @@ public class BankKlient implements IBankKlient {
             return;
         }
 
-        modelKonta.dodanieSrodkow(konto, kwota);
-        modelKonta.odjecieSrodkow(zalogowaneKonto, kwota);
+        modelKonto.dodanieSrodkow(konto, kwota);
+        modelKonto.odjecieSrodkow(zalogowaneKonto, kwota);
 
         widokKlient.wyswietlKomunikat("przelew wyslany!");
         widokKlient.wyswietlKomunikat("saldo ziomeczka do ktorego wyslales przelew");
@@ -70,6 +68,40 @@ public class BankKlient implements IBankKlient {
 
         widokKlient.wyswietlKomunikat("twoje saldo po przlewie");
         widokKlient.wyswietlKomunikat(Float.toString(zalogowaneKonto.getSaldo()));
+    }
+
+    private void sprawdzSaldo() {
+        Konto zalogowaneKonto = modelLogowania.getZalogowaneKonto();
+        widokKlient.wyswietlSaldo(zalogowaneKonto.getSaldo());
+    }
+
+    public void zmienWalute (int wybor) {
+        Konto zalogowaneKonto = modelLogowania.getZalogowaneKonto();
+        float saldo = zalogowaneKonto.getSaldo();
+
+        ////api call
+
+        zalogowaneKonto.setSaldo(saldo);
+    }
+
+    private void sprawdzHistorieTransakcji() {
+        Konto zalogowaneKonto = modelLogowania.getZalogowaneKonto();
+        widokKlient.wyswietlHistorieTransakcji(zalogowaneKonto.getHistoriaTransakcji());
+    }
+
+    private void generowanieMiesiecznegoWyciaguKonta() {
+        float kwota = 0;
+
+        ArrayList<Transakcja> historiaTransakcji = modelLogowania.getZalogowaneKonto().getHistoriaTransakcji();
+        for(Transakcja trans: historiaTransakcji) {
+            kwota += trans.getKwota();
+        }
+
+        widokKlient.wyswietlKomunikat(Float.toString(kwota));
+    }
+
+    private void ustawienieStalychZlecen() {
+        //
     }
 
     public static void main(String[] args) {

@@ -1,18 +1,17 @@
 package Widok;
 
-import Prezenter.BankKlient;
-import Prezenter.BankPracownik;
-import Prezenter.IBankPracownik;
+import Prezenter.PrezenterPracownik;
+import Prezenter.IPrezenterPracownik;
 
 import java.util.Scanner;
 
 public class WidokPracownik implements IWidokPracownik{
-    IBankPracownik bankPracownik;
+    private IPrezenterPracownik prezenterPracownik;
 
     public void wyswietlLogowanie() {}
 
     public void wyswietlMenu() {
-        bankPracownik = new BankPracownik();
+        prezenterPracownik = new PrezenterPracownik();
 
         System.out.println("wybierz cos");
         System.out.println("1. utworz konto");
@@ -21,11 +20,11 @@ public class WidokPracownik implements IWidokPracownik{
         Scanner scanner =  new Scanner(System.in);
         String wybor = scanner.nextLine();
 
-        bankPracownik.menu(wybor);
+        prezenterPracownik.menu(wybor);
     }
 
     public void wyswietlZmienDaneOsobowe() {
-        bankPracownik = new BankPracownik();
+        prezenterPracownik = new PrezenterPracownik();
 
         System.out.println("podaj pesel uzytkownika dla ktorego chcesz zmienic dane");
         Scanner scanner =  new Scanner(System.in);
@@ -38,10 +37,11 @@ public class WidokPracownik implements IWidokPracownik{
         System.out.println("wprowadz nowa wartosc:");
         String wartosc = scanner.nextLine();
 
-        bankPracownik.zmienDaneOsobowe(pesel, Integer.parseInt(wybor), wartosc);
+        prezenterPracownik.zmienDaneOsobowe(pesel, Integer.parseInt(wybor), wartosc);
     }
 
     public void wyswietlUtworzKonto() {
-        bankPracownik = new BankPracownik();
+        prezenterPracownik = new PrezenterPracownik();
     }
+    public void wyswietlUsunKonto() {}
 }

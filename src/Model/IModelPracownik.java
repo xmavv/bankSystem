@@ -1,2 +1,3 @@
-package Model;public interface IModelPracownik {
+package Model;
+public interface IModelPracownik {
 }

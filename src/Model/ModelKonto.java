@@ -2,21 +2,22 @@ package Model;
 
 import java.util.ArrayList;
 
-public class ModelKonta implements IModelKonta{
+public class ModelKonto implements IModelKonto {
     static ArrayList<Konto> konta = new ArrayList<>() {{
         add(new Konto(new Klient("ziomek", "ziomek", 421, "ziomek", "ziomek"), "ziomek", "ziomek", "oszczednosciowe", 500));
         add(new Konto(new Klient("jali", "lipka", 888, "xd", "gahahahlolxd"), "essa", "zio", "walutowe", 501));
     }};
-    IModelKlienta modelKlienta;
+    private IModelKlient modelKlient;
     private static int numerKonta = 555;
 
     public void utworzKonto(String login, String haslo, String typ, String imie, String nazwisko, String pesel, String adres) {
-        modelKlienta = new ModelKlienta();
+        modelKlient = new ModelKlient();
 
-        Klient klient = modelKlienta.wyszukajKlienta(pesel);
+        Klient klient = modelKlient.wyszukajKlienta(pesel);
         if (klient == null) {
-            Klient utworzonyKlient = modelKlienta.utworzKlienta(imie, nazwisko, pesel, adres);
+            Klient utworzonyKlient = modelKlient.utworzKlienta(imie, nazwisko, pesel, adres);
             konta.add(new Konto(utworzonyKlient, login, haslo, typ, numerKonta));
+            numerKonta++;
         } else {
             konta.add(new Konto(klient, login, haslo, typ, numerKonta));
         }

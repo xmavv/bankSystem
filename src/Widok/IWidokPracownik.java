@@ -1,7 +1,7 @@
 package Widok;
 
-public interface IWidokPracownik extends IWidokUzytkownika{
-    void wyswietlMenu();
+public interface IWidokPracownik extends IWidokUzytkownik {
     void wyswietlZmienDaneOsobowe();
     void wyswietlUtworzKonto();
+    void wyswietlUsunKonto();
 }

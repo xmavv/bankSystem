@@ -1,14 +1,17 @@
 package Widok;
 
-import Prezenter.BankKlient;
-import Prezenter.IBankKlient;
+import Model.Transakcja;
+import Prezenter.PrezenterKlient;
+import Prezenter.IPrezenterKlient;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WidokKlient implements IWidokKlient{
-    IBankKlient bankKlient;
+    private IPrezenterKlient prezenterKlient;
     public void wyswietlLogowanie() {
-        bankKlient = new BankKlient();
+        prezenterKlient = new PrezenterKlient();
 
         System.out.println("zaloguj sie spoko");
         System.out.println("podaj numer konta");
@@ -17,11 +20,11 @@ public class WidokKlient implements IWidokKlient{
         System.out.println("podaj haslo");
         String haslo = scanner.nextLine();
 
-        bankKlient.zaloguj(Integer.parseInt(numerKonta), haslo);
+        prezenterKlient.zaloguj(Integer.parseInt(numerKonta), haslo);
     }
 
     public void wyswietlMenu() {
-        bankKlient = new BankKlient();
+        prezenterKlient = new PrezenterKlient();
 
         System.out.println("wybierz cos");
         System.out.println("1. przelew bankowy");
@@ -32,11 +35,11 @@ public class WidokKlient implements IWidokKlient{
         Scanner scanner =  new Scanner(System.in);
         String wybor = scanner.nextLine();
 
-        bankKlient.menu(wybor);
+        prezenterKlient.menu(wybor);
     }
 
     public void wyswieltWyslijPrzelew() {
-        bankKlient = new BankKlient();
+        prezenterKlient = new PrezenterKlient();
 
         System.out.println("podaj kwote");
         Scanner scanner =  new Scanner(System.in);
@@ -46,19 +49,30 @@ public class WidokKlient implements IWidokKlient{
         System.out.println("podaj tytul przelewu (min 5 znakow)");
         String tytulPrzelewu = scanner.nextLine();
 
-        bankKlient.wyslijPrzelew(Float.parseFloat(kwota), Integer.parseInt(numerKonta), tytulPrzelewu);
+        prezenterKlient.wyslijPrzelew(Float.parseFloat(kwota), Integer.parseInt(numerKonta), tytulPrzelewu);
 
     }
 
-    public void wyswietlHistorieTransakcji() {
-        System.out.println("ostatnie transakcje: 150zl to jakub lipka");
+    public void wyswietlHistorieTransakcji(ArrayList<Transakcja> historiaTransakcji) {
+        historiaTransakcji.forEach(trans -> {
+            System.out.println(trans.toString());
+        });
     }
 
     public void wyswietlWymianaWalut() {
+        prezenterKlient = new PrezenterKlient();
+
         System.out.println("wybierz walute");
+        System.out.println("1. euro");
+        System.out.println("2. dolar");
+        System.out.println("3. funt");
+        Scanner scanner =  new Scanner(System.in);
+        String wybor = scanner.nextLine();
+
+        prezenterKlient.zmienWalute(Integer.parseInt(wybor));
     }
 
-    public void wyswietlSaldo() {
-        System.out.println("twoje saldo to 0zl xd");
+    public void wyswietlSaldo(float saldo) {
+        System.out.println("twoje saldo wynosi: " + saldo);
     }
 }

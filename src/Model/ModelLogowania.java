@@ -1,10 +1,10 @@
 package Model;
 
 public class ModelLogowania implements IModelLogowania {
-    IModelKonta modelKonta = new ModelKonta();
+    private IModelKonto modelKonto = new ModelKonto();
     private static Konto zalogowaneKonto;
     public boolean sprawdzLogowanie(int numerKonta, String haslo) {
-        zalogowaneKonto = modelKonta.wyszukajKonto(numerKonta);
+        zalogowaneKonto = modelKonto.wyszukajKonto(numerKonta);
         if(zalogowaneKonto == null) return false;
 
         if(zalogowaneKonto.getHaslo().equals(haslo)) {
@@ -12,8 +12,5 @@ public class ModelLogowania implements IModelLogowania {
         } else return false;
     }
 
-    public Konto getZalogowaneKonto() {
-        System.out.println(zalogowaneKonto.getSaldo());
-        return zalogowaneKonto;
-    }
+    public Konto getZalogowaneKonto() {return zalogowaneKonto;}
 }

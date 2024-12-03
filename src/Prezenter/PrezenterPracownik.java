@@ -4,9 +4,9 @@ import Model.*;
 import Widok.IWidokPracownik;
 import Widok.WidokPracownik;
 
-public class BankPracownik implements IBankPracownik{
-    IWidokPracownik widokPracownik;
-    IModelKlienta modelKlienta;
+public class PrezenterPracownik implements IPrezenterPracownik {
+    private IWidokPracownik widokPracownik;
+    private IModelKlient modelKlient;
 
     public void menu(String wybor) {
         widokPracownik = new WidokPracownik();
@@ -24,10 +24,10 @@ public class BankPracownik implements IBankPracownik{
     }
 
     public void zmienDaneOsobowe(String pesel, int wybor, String wartosc) {
-        modelKlienta = new ModelKlienta();
+        modelKlient = new ModelKlient();
         widokPracownik = new WidokPracownik();
 
-        Klient klient = modelKlienta.wyszukajKlienta(pesel);
+        Klient klient = modelKlient.wyszukajKlienta(pesel);
         if(klient == null) {
             widokPracownik.wyswietlKomunikat("nie ma takiego klienta");
             return;
@@ -39,21 +39,21 @@ public class BankPracownik implements IBankPracownik{
                 widokPracownik.wyswietlZmienDaneOsobowe();
                 return;
             };
-            modelKlienta.zmienImieKlienta(klient, wartosc);
+            modelKlient.zmienImieKlienta(klient, wartosc);
         } else if(wybor == 2) {
             if(!czyImieNazwiskoPoprawne(wartosc)) {
                 widokPracownik.wyswietlKomunikat("w twoich danych wystepuja cyfry!");
                 widokPracownik.wyswietlZmienDaneOsobowe();
                 return;
             }
-            modelKlienta.zmienNazwiskoKlienta(klient, wartosc);
+            modelKlient.zmienNazwiskoKlienta(klient, wartosc);
         } else {
             if(!czyImieNazwiskoPoprawne(wartosc)) {
                 widokPracownik.wyswietlKomunikat("w twoich danych wystepuja cyfry!");
                 widokPracownik.wyswietlZmienDaneOsobowe();
                 return;
             }
-            modelKlienta.zmienAdresKlienta(klient, wartosc);
+            modelKlient.zmienAdresKlienta(klient, wartosc);
         }
 
         widokPracownik.wyswietlKomunikat("dane poprawnie zmienione!");

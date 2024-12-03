@@ -1,10 +1,12 @@
 package Widok;
 
-public interface IWidokKlient extends IWidokUzytkownika{
-    void wyswietlLogowanie();
-    void wyswietlMenu();
+import Model.Transakcja;
+
+import java.util.ArrayList;
+
+public interface IWidokKlient extends IWidokUzytkownik {
     void wyswieltWyslijPrzelew();
-    void wyswietlHistorieTransakcji();
+    void wyswietlHistorieTransakcji(ArrayList<Transakcja> historiaTransakcji);
     void wyswietlWymianaWalut();
-    void wyswietlSaldo();
+    void wyswietlSaldo(float saldo);
 }

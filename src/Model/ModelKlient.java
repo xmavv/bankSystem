@@ -2,18 +2,18 @@ package Model;
 
 import java.util.ArrayList;
 
-public class ModelKlienta implements IModelKlienta{
-    static ArrayList<Klient> klienci = new ArrayList<>() {{
+public class ModelKlient implements IModelKlient {
+    private static ArrayList<Klient> klienci = new ArrayList<>() {{
         add(new Klient("minos", "menos", 23, "haha", "ziomek"));
     }};
 
-    private static int id = 0;
+    private static int klientId = 0;
 
     public Klient utworzKlienta(String imie, String nazwisko, String pesel, String adres) {
-        Klient klient = new Klient(imie, nazwisko, id, pesel, adres);
+        Klient klient = new Klient(imie, nazwisko, klientId, pesel, adres);
 
         klienci.add(klient);
-        id++;
+        klientId++;
 
         return klient;
     }

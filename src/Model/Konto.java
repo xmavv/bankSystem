@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Konto {
     private Klient klient;
-    private ArrayList<String> listaTransakcji;
+    private ArrayList<Transakcja> historiaTransakcji;
     private float saldo = 500;
     private String typ;
     private String login;
@@ -20,8 +20,6 @@ public class Konto {
     public String getHaslo() {
         return haslo;
     }
-    public Klient getKlient() {return klient;}
-
     public int getNumerKonta() {return numerKonta;}
 
     public float getSaldo() {
@@ -31,9 +29,15 @@ public class Konto {
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
-    public void setTyp(String typ) {this.typ = typ;}
-    public void setLogin(String login) {this.login = login;}
-    public void setHaslo(String haslo) {this.haslo = haslo;}
-    public String getTyp() {return typ;}
-    public String getLogin() {return login;}
+    public ArrayList<Transakcja> getHistoriaTransakcji() {
+        return historiaTransakcji;
+    }
+    public void setHistoriaTransakcji(ArrayList<Transakcja> historiaTransakcji) {
+        this.historiaTransakcji = historiaTransakcji;
+    }
+//    public void setTyp(String typ) {this.typ = typ;}
+//    public void setLogin(String login) {this.login = login;}
+//    public void setHaslo(String haslo) {this.haslo = haslo;}
+//    public String getTyp() {return typ;}
+//    public String getLogin() {return login;}
 }

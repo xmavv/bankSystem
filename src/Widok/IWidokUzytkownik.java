@@ -1,7 +1,8 @@
 package Widok;
 
-public interface IWidokUzytkownika {
+public interface IWidokUzytkownik {
     void wyswietlLogowanie();
+    void wyswietlMenu();
     default void wyswietlKomunikat(String komunikat) {
         System.out.println(komunikat);
     };

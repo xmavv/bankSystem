@@ -1,6 +1,6 @@
 package Model;
 
-public interface IModelKonta {
+public interface IModelKonto {
     void utworzKonto(String login, String haslo, String typ, String imie, String nazwisko, String pesel, String adres);
     Konto wyszukajKonto(int numerKonta);
     void dodanieSrodkow(Konto konto, float kwota);
