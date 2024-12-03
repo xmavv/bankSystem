@@ -1,6 +1,6 @@
 package Widok;
 
-public interface IWidokKlient {
+public interface IWidokKlient extends IWidokUzytkownika{
     void wyswietlLogowanie();
     void wyswietlMenu();
     void wyswieltWyslijPrzelew();

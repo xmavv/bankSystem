@@ -1,4 +1,4 @@
-package Presenter;
+package Prezenter;
 
 import Model.IModelKonta;
 import Model.IModelLogowania;
@@ -16,10 +16,10 @@ public class BankKlient implements IBankKlient {
         widokKlient = new WidokKlient();
 
         if(modelLogowania.sprawdzLogowanie(numerKonta, haslo)) {
-            System.out.println("zalogowano");
+            widokKlient.wyswietlKomunikat("zalogowano");
             widokKlient.wyswietlMenu();
         } else {
-            System.out.printf("nie zalogowano, sporobj jeszcze raz");
+            widokKlient.wyswietlKomunikat("nie zalogowano, sporobj jeszcze raz");
             widokKlient.wyswietlLogowanie();
         }
     }
@@ -33,7 +33,7 @@ public class BankKlient implements IBankKlient {
             case("3"): widokKlient.wyswietlWymianaWalut(); break;
             case("4"): widokKlient.wyswietlSaldo(); break;
             default: {
-                System.out.println("zly wybor xd");
+                widokKlient.wyswietlKomunikat("zly wybor");
                 break;
             }
         }
@@ -41,35 +41,35 @@ public class BankKlient implements IBankKlient {
         widokKlient.wyswietlMenu();
     }
 
-    public void wyslijPrzelew(int kwota, int numerKonta, String tytul) {
+    public void wyslijPrzelew(float kwota, int numerKonta, String tytul) {
         modelKonta = new ModelKonta();
 
         Konto konto = modelKonta.wyszukajKonto(numerKonta);
         if(konto == null) {
-            System.out.println("nie ma takiego konta!");
+            widokKlient.wyswietlKomunikat("nie ma takiego konta!");
             return;
         }
 
         Konto zalogowaneKonto = modelLogowania.getZalogowaneKonto();
         if(zalogowaneKonto.getSaldo() < kwota) {
-            System.out.println("nie masz wystarczjaco pieniedzy!");
+            widokKlient.wyswietlKomunikat("nie masz wystarczjaco pieniedzy!");
             return;
         };
 
         if(tytul.length() < 5) {
-            System.out.println("tytul powinien miec minimum 5 znakow!");
+            widokKlient.wyswietlKomunikat("tytul powinien miec minimum 5 znakow!");
             return;
         }
 
         modelKonta.dodanieSrodkow(konto, kwota);
         modelKonta.odjecieSrodkow(zalogowaneKonto, kwota);
 
-        System.out.println("przelew wyslany!");
-        System.out.println("saldo ziomeczka do ktorego wyslales przelew");
-        System.out.println(konto.getSaldo() + "\n");
+        widokKlient.wyswietlKomunikat("przelew wyslany!");
+        widokKlient.wyswietlKomunikat("saldo ziomeczka do ktorego wyslales przelew");
+        widokKlient.wyswietlKomunikat(konto.getSaldo() + "\n");
 
-        System.out.println("twoje saldo po przlewie");
-        System.out.println(zalogowaneKonto.getSaldo());
+        widokKlient.wyswietlKomunikat("twoje saldo po przlewie");
+        widokKlient.wyswietlKomunikat(Float.toString(zalogowaneKonto.getSaldo()));
     }
 
     public static void main(String[] args) {

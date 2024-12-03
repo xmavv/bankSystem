@@ -1,7 +1,7 @@
 package Widok;
 
-import Presenter.BankKlient;
-import Presenter.IBankKlient;
+import Prezenter.BankKlient;
+import Prezenter.IBankKlient;
 
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class WidokKlient implements IWidokKlient{
         bankKlient = new BankKlient();
 
         System.out.println("wybierz cos");
-        System.out.println("1. przelewik");
+        System.out.println("1. przelew bankowy");
         System.out.println("2. historia transakcji");
         System.out.println("3. wymiana walut");
         System.out.println("4. sprawdzenie salda");
@@ -46,7 +46,7 @@ public class WidokKlient implements IWidokKlient{
         System.out.println("podaj tytul przelewu (min 5 znakow)");
         String tytulPrzelewu = scanner.nextLine();
 
-        bankKlient.wyslijPrzelew(Integer.parseInt(kwota), Integer.parseInt(numerKonta), tytulPrzelewu);
+        bankKlient.wyslijPrzelew(Float.parseFloat(kwota), Integer.parseInt(numerKonta), tytulPrzelewu);
 
     }
 

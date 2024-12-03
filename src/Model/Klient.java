@@ -12,4 +12,10 @@ public class Klient extends Uzytkownik {
     public String getPesel() {
         return pesel;
     }
+
+    public void setAdres(String adres) {this.adres = adres;}
+
+    public String getAdres() {
+        return adres;
+    }
 }

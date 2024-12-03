@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ModelKonta implements IModelKonta{
     static ArrayList<Konto> konta = new ArrayList<>() {{
         add(new Konto(new Klient("ziomek", "ziomek", 421, "ziomek", "ziomek"), "ziomek", "ziomek", "oszczednosciowe", 500));
-        add(new Konto(new Klient("jali", "lipka", 888, "twoja", "mama"), "essa", "zio", "walutowe", 501));
+        add(new Konto(new Klient("jali", "lipka", 888, "xd", "gahahahlolxd"), "essa", "zio", "walutowe", 501));
     }};
     IModelKlienta modelKlienta;
     private static int numerKonta = 555;
@@ -29,12 +29,21 @@ public class ModelKonta implements IModelKonta{
 
         return null;
     }
-    public void dodanieSrodkow(Konto konto, int kwota) {
-        int saldo = konto.getSaldo();
+    public void dodanieSrodkow(Konto konto, float kwota) {
+        float saldo = konto.getSaldo();
         konto.setSaldo(saldo + kwota);
     }
-    public void odjecieSrodkow(Konto konto, int kwota) {
-        int saldo = konto.getSaldo();
+    public void odjecieSrodkow(Konto konto, float kwota) {
+        float saldo = konto.getSaldo();
         konto.setSaldo(saldo - kwota);
     }
+//    public void zmienTypKonta(Konto konto, String wartosc) {
+//        konto.setTyp(wartosc);
+//    }
+//    public void zmienLoginKonta(Konto konto, String wartosc) {
+//        konto.setLogin(wartosc);
+//    }
+//    public void zmienHasloKonta(Konto konto, String wartosc) {
+//        konto.setHaslo(wartosc);
+//    }
 }

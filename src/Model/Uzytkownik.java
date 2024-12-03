@@ -9,5 +9,9 @@ public abstract class Uzytkownik {
         this.nazwisko = nazwisko;
         this.uzytkownikId = id;
     }
+
+    protected void setImie(String imie) {this.imie = imie;}
+    public String getImie() {return imie;}
+    protected void setNazwisko(String nazwisko) {this.nazwisko = nazwisko;}
+    public String getNazwisko() {return nazwisko;}
 }
-//POLSKA GUROM POSLKIE NAZWY
